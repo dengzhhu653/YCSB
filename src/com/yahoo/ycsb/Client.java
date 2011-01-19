@@ -643,6 +643,18 @@ public class Client
 
 		warningthread.start();
 		
+		// print properties here instead of each thread. 
+		System.out.println("***************** properties *****************");
+    if (props!=null)
+    {
+      for (Enumeration e=props.propertyNames(); e.hasMoreElements(); )
+      {
+        String k=(String)e.nextElement();
+        System.out.println("\""+k+"\"=\""+props.getProperty(k)+"\"");
+      }
+    }
+    System.out.println("**********************************************");
+		
 		//set up measurements
 		Measurements.setProperties(props);
 		
