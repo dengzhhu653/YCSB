@@ -1,14 +1,30 @@
 #!/usr/bin/env bash
-
 # run test on ec2 for hbase. -mingjie
+# before running: 
+# 1. (as root) add ec2-user to the 'hadoop' group before running.
+#    (this is so you have read access to /etc/hbase/conf/hbase.keytab)
+
 set -x
+
 dir=`dirname "$0"`
 dir=`cd "$dir"; pwd`
 
 
 HBASE_HOME=/usr/lib/hbase
+HADOOP_HOME=/usr/lib/hadoop
 . $HBASE_HOME/conf/hbase-env.sh
 YCSB_HOME=/home/ec2-user/YCSB
+
+cp $HBASE_HOME/hbase.jar $YCSB_HOME/db/hbase/lib/
+cp $HADOOP_HOME/hadoop-core.jar $YCSB_HOME/db/hbase/lib/
+
+#<get YCSB ready>
+pushd . 
+cd $YCSB_HOME
+ant
+ant dbcompile-hbase
+popd
+#</get YCSB ready>
 
 now=`date +%Y%m%d-%H%M`
 resultDir=${dir}/results/${now}
