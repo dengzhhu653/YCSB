@@ -9,11 +9,10 @@ set -x
 dir=`dirname "$0"`
 dir=`cd "$dir"; pwd`
 
-
 HBASE_HOME=/usr/lib/hbase
 HADOOP_HOME=/usr/lib/hadoop
 . $HBASE_HOME/conf/hbase-env.sh
-YCSB_HOME=/home/ec2-user/YCSB
+YCSB_HOME=/media/ephemeral0/ec2-user/YCSB
 
 cp $HBASE_HOME/hbase.jar $YCSB_HOME/db/hbase/lib/
 cp $HADOOP_HOME/hadoop-core.jar $YCSB_HOME/db/hbase/lib/
